@@ -1,18 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import {Header, Routines, Home, Register, Login, Profile, MyRoutines, SingleRoutine} from './index';
-import { getPublicRoutines, getUserRoutines } from '../api/api';
+import {Header, Routines, Activities, Home, Register, Login, Profile, MyRoutines, SingleRoutine} from './index';
+import { getPublicRoutines, getAllActivities, getUserRoutines } from '../api/api';
 
-// const user = [
-//     {id: 71, username: 'a'}
-// ]
-// setUser([])
-// const user =[
-
-// ]
 const App = () => {
     // const [routines, setRoutines] = useState([]);
     const [publicRoutines, setPublicRoutines] = useState([])
+    const [allActivities, setAllActivities] = useState([])
     const [user, setUser] = useState([]);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [username, setUsername] = useState('');
@@ -27,10 +21,11 @@ const App = () => {
 
         const getData = async () => {
             const fetchedRoutines = await getPublicRoutines();
+            const fetchedActivities = await getAllActivities();
             // const userRoutines = await getUserRoutines(token);
             // console.log('userRoutines--->', userRoutines)
             // setPublicRoutines(fetchedRoutines.filter(routine => routine.isPublic))
-
+            setAllActivities(fetchedActivities);
             setPublicRoutines(fetchedRoutines);
             // setUserRoutines(userRoutines);
         }
@@ -49,7 +44,7 @@ return (
             <Route path='/me' element={<Profile user={user} isLoggedIn={isLoggedIn} setToken={setToken} setUser={setUser} setIsLoggedIn={setIsLoggedIn} username={username} setUsername={setUsername} password={password} setPassword={setPassword} />}></Route>
             <Route path='/routines' element={<Routines name={name} goal={goal} setIsPublic={setIsPublic} isPublic={isPublic} setGoal={setGoal} setName={setName} token={token} publicRoutines={publicRoutines} setPublicRoutines={setPublicRoutines} user={user} isLoggedIn={isLoggedIn}/>}></Route>
             <Route path='/:username/routines' element={<MyRoutines setSingleRoutine={setSingleRoutine} isLoggedIn={isLoggedIn} user={user} token={token}/>}></Route>
-            <Route path='/activities' element={<h1>This is activities33</h1>}></Route>
+            <Route path='/activities' element={<Activities allActivities={allActivities}/>}></Route>
             <Route path='/:routineId' element={<SingleRoutine user={user} token={token} isPublic={isPublic} setIsPublic={setIsPublic} name={name} goal={goal} isLoggedIn={isLoggedIn} singleRoutine={singleRoutine} setGoal={setGoal} setName={setName}/>}></Route>
         </Routes>
     </div>

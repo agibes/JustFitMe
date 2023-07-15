@@ -133,3 +133,17 @@ export const deleteRoutine = async (routineId, token) => {
         console.error(error)
     }
 }
+
+
+export const getAllActivities = async () => {
+    try {
+        const response = await fetch('/api/activities');
+        console.log('response------>',response)
+        const data = await response.json();
+
+        // console.log(data);
+        return data;
+    } catch (error) {
+        console.error(error)
+    }
+}

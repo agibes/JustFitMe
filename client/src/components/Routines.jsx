@@ -88,7 +88,7 @@ const Routines = ({publicRoutines, setPublicRoutines, isLoggedIn, user, token, s
 
     return (
         <>
-        <div class="rt-bg-img"></div>
+        <div className="rt-bg-img"></div>
 
         <div id="routines">
             <h1>Routines</h1>
