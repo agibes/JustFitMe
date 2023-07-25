@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../api/api";
 import { useEffect } from "react";
+import './Login.css';
 
 const Login = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername, password, setPassword, setToken, token }) => {
     // console.log(user, isLoggedIn)
@@ -41,16 +42,22 @@ const Login = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername,
         
         return (
         <>
-        <div id="loginForm">
+        <div className="rt-bg-img"></div>
+        <div id="login">
+
+        <div id="login-form">
+            <h1>Login</h1>
             <label>
                 <input type='text' placeholder="username" onChange={(event) => setUsername(event.target.value)} required/>
             </label>
             <label>
                 <input type='text' placeholder="password"onChange={(event) => setPassword(event.target.value)} required/>
             </label>
-            <button type="submit" onClick={handleLogin}>Login</button>
+            <p><a href="#">Forgot Password?</a></p>
+            <button id="login-button" type="submit" onClick={handleLogin}>Login</button>
+            <p>Not a member?<a href="#"> Sign up!</a></p>
         </div>
-        <h1>This is Login Page</h1>
+        </div>
         </>
     );
 }
