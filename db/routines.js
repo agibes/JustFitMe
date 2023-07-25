@@ -2,13 +2,13 @@ const { attachActivitiesToRoutines } = require("./activities");
 const { getUserByUsername } = require ("./users");
 const client = require("./client");
 
-async function createRoutine({ creatorId, isPublic, name, goal }) {
+async function createRoutine({ creatorId, isPublic, name, goal, img }) {
   try {
     const{rows: [routine]} = await client.query(`
-      INSERT INTO routines("creatorId", "isPublic", name, goal)
-      VALUES ($1, $2, $3, $4)
+      INSERT INTO routines("creatorId", "isPublic", name, goal, img)
+      VALUES ($1, $2, $3, $4, $5)
       RETURNING *;
-    `, [creatorId, isPublic, name, goal]);
+    `, [creatorId, isPublic, name, goal, img]);
     return routine; 
   } catch (error) {
     throw new Error('Unable to create routine');

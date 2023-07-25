@@ -98,8 +98,8 @@ const Routines = ({publicRoutines, setPublicRoutines, isLoggedIn, user, token, s
          <div id="routine-carousel">
             <button id="prev" onClick={loadPrev}>&#60;</button>
             {Object.keys(prev).length > 0 &&
-                <div class="routine-card" id="routine-prev">
-                    <img src="#" alt="" />
+                <div className="routine-card" id="routine-prev">
+                    <img src={prev.img} alt="" />
                     <div class="routine-info">
                         <p>Name: {prev.name}</p>
                         <p>Goal: {prev.goal}</p>
@@ -110,14 +110,14 @@ const Routines = ({publicRoutines, setPublicRoutines, isLoggedIn, user, token, s
             }
 
             {Object.keys(prev).length == 0 &&
-                <div class="routine-card" id="routine-last">
-                    <img src="#" alt="" />
+                <div className="routine-card" id="routine-last">
+                    <img src={prev.img} alt="" />
                 </div>
             }
 
             <div class="routine-card" id="routine-active">
-                <img src="#" alt="" />
-                <div class="routine-info">
+                <img src={active.img} alt="" />
+                <div className="routine-info">
                     <p>Name: {active.name}</p>
                     <p>Goal: {active.goal}</p>
                     <p>Creator ID: {active.creatorName}</p>
@@ -126,9 +126,9 @@ const Routines = ({publicRoutines, setPublicRoutines, isLoggedIn, user, token, s
             </div>
 
             {Object.keys(next).length > 0 &&
-                <div class="routine-card" id="routine-next">
-                    <img src="#" alt="" />
-                    <div class="routine-info">
+                <div className="routine-card" id="routine-next">
+                    <img src={next.img} alt="" />
+                    <div className="routine-info">
                         <p>Name: {next.name}</p>
                         <p>Goal: {next.goal}</p>
                         <p>Creator ID: {next.creatorName}</p>
@@ -138,8 +138,8 @@ const Routines = ({publicRoutines, setPublicRoutines, isLoggedIn, user, token, s
             }
 
             {Object.keys(next).length == 0 &&
-                <div class="routine-card" id="routine-last">
-                    <img src="#" alt="" />
+                <div className="routine-card" id="routine-last">
+                    <img src={next.img} alt="" />
                 </div>
             }
 

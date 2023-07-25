@@ -51,10 +51,10 @@ const Register = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUserna
             </label>
             <p>Password must be at least 8 characters long</p>
             <button id="register-button" type="submit" onClick={handleRegister}>Register</button>
-            <p>Already a member?<a href="#"> Login!</a></p>
+            <p>Already a member?<a href="/login"> Login!</a></p>
         </div>
         </div>
-        =
+        
         </>
     );
 }

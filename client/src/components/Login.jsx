@@ -55,7 +55,7 @@ const Login = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername,
             </label>
             <p><a href="#">Forgot Password?</a></p>
             <button id="login-button" type="submit" onClick={handleLogin}>Login</button>
-            <p>Not a member?<a href="#"> Sign up!</a></p>
+            <p>Not a member?<a href="/register"> Sign up!</a></p>
         </div>
         </div>
         </>

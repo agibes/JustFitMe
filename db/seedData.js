@@ -46,7 +46,8 @@ async function createTables() {
         "creatorId" INTEGER REFERENCES users(Id),
         "isPublic" BOOLEAN DEFAULT false,
         name VARCHAR(255) UNIQUE NOT NULL,
-        goal TEXT NOT NULL
+        goal VARCHAR(255) NOT NULL,
+        img VARCHAR(255) NOT NULL
       );
 
       CREATE TABLE routine_activities (
@@ -137,24 +138,28 @@ async function createInitialRoutines() {
       isPublic: true,
       name: "Bicep Day",
       goal: "Work the Back and Biceps.",
+      img: "bicep.jpg"
     },
     {
       creatorId: 1,
       isPublic: true,
       name: "Chest Day",
       goal: "To beef up the Chest and Triceps!",
+      img: "chest.jpg"
     },
     {
       creatorId: 1,
       isPublic: true,
       name: "Leg Day",
       goal: "Running, stairs, squats",
+      img: "leg.jpg"
     },
     {
       creatorId: 2,
       isPublic: true,
       name: "Cardio Day",
       goal: "Running, stairs. Stuff that gets your heart pumping!",
+      img: "cardio.jpg"
     },
   ]
   const routines = await Promise.all(
