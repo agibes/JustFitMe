@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { registerUser } from '../api/api';
+import './Register.css';
 
 
 const Register = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername, password, setPassword, setToken, }) => {
@@ -36,17 +37,24 @@ const Register = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUserna
         
         return (
             <>
+
+        <div className="rt-bg-img"></div>
+        <div id="register">
             
-        <div id="registerForm">
+        <div id="register-form">
+            <h1>Register</h1>
             <label>
                 <input type='text' placeholder="username" onChange={(event) => setUsername(event.target.value)} required/>
             </label>
             <label>
                 <input type='text' placeholder="password"onChange={(event) => setPassword(event.target.value)} required/>
             </label>
-            <button type="submit" onClick={handleRegister}>Register</button>
+            <p>Password must be at least 8 characters long</p>
+            <button id="register-button" type="submit" onClick={handleRegister}>Register</button>
+            <p>Already a member?<a href="#"> Login!</a></p>
         </div>
-        <h1>This is register Page</h1>
+        </div>
+        =
         </>
     );
 }
