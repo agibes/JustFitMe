@@ -1,19 +1,40 @@
 const client = require('./client');
 
-async function addActivityToRoutine({
-  routineId,
-  activityId,
-  count,
-  duration,
-}) {
+async function createRoutineActivity({routineId, activityId, count, duration}) {
   try {
-    const {rows: [activity]} = await client.query(`
+    const {rows: [routineActivity]} = await client.query(`
       INSERT INTO routine_activities("routineId", "activityId", count, duration)
       VALUES ($1, $2, $3, $4)
       RETURNING *;
     `, [routineId, activityId, count, duration]);
-    return activity;
+    return routineActivity;
   } catch (error) {
+    console.error(error);
+  }
+}
+
+async function attachRoutineActivitiesToRoutines(routines) {
+  try {
+    const routinesToReturn = [...routines];
+
+    const placeholders = routines.map((_, index) => `$${index + 1}`).join(', ');
+
+    const routineIds = routines.map((routine) => routine.id);
+
+    const {rows: routineActivities} = await client.query(`
+      SELECT routines.*, routine_activities.duration, routine_activities.count, routine_activities."routineId", routine_activities.id AS "routineActivityId"
+      FROM routines
+      JOIN routine_activities ON routine_activities."routineId" = routines.id
+      WHERE routine_activities."routineId" IN (${placeholders})
+    `, routineIds);
+
+    for (const routine of routinesToReturn) {
+      const routineActivitiesForRoutine = routineActivities.filter((routineActivity)=> routineActivity.routineId == routine.id);
+      routine.routineActivities = routineActivitiesForRoutine;
+    }
+
+    return routinesToReturn;
+  } catch(error) {
     console.error(error);
   }
 }
@@ -43,9 +64,6 @@ async function getRoutineActivitiesByRoutine({ id }) {
     console.error(error);
   }
 }
-
-
-
 
 async function updateRoutineActivity({ id, ...fields }) {
   try {
@@ -97,9 +115,10 @@ async function canEditRoutineActivity(routineActivityId, userId) {
 
 module.exports = {
   getRoutineActivityById,
-  addActivityToRoutine,
+  createRoutineActivity,
   getRoutineActivitiesByRoutine,
   updateRoutineActivity,
   destroyRoutineActivity,
   canEditRoutineActivity,
+  attachRoutineActivitiesToRoutines
 };

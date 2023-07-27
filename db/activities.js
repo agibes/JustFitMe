@@ -1,6 +1,5 @@
 const client = require('./client');
 
-// database functions
 async function createActivity({ name, description }) {
   try {
     const { rows: [activity] } = await client.query(`
@@ -53,6 +52,7 @@ async function getActivityByName(name) {
   }
 }
 
+//this function should be called attach routineActivities to activities
 async function attachActivitiesToRoutines(routines) {
   const routinesToReturn = [...routines]; // prevents unwanted side effects.
   // $1, $2, $3
@@ -70,7 +70,7 @@ async function attachActivitiesToRoutines(routines) {
     routineIds
   );
 
-  // console.log('these are my activities: ----->', activities);
+  console.log('these are my activities: ----->', activities);
 
   // loop over each routine
   for (const routine of routinesToReturn) {
@@ -86,32 +86,6 @@ async function attachActivitiesToRoutines(routines) {
   // console.log('these are my routines: ----->', routines[3].activities);
   // console.log(routinesToReturn);
   return routinesToReturn;
-  // try {
-  //   const routineIds = routines.map((routine) => routine.id);
-  //   const { rows: activities } = await client.query(`
-  //     SELECT *
-  //     FROM routine_activities
-  //     JOIN activities ON routine_activities."activityId" = activities.id
-  //     WHERE routine_activities."routineId" IN (${routineIds.join(', ')});
-  //   `);
-
-  //   const activitiesByRoutineId = activities.reduce((result, activity) => {
-  //     const { routineId, ...activityData } = activity;
-  //     if (!result[routineId]) {
-  //       result[routineId] = [];
-  //     }
-  //     result[routineId].push(activityData);
-  //     return result;
-  //   }, {});
-
-  //   routines.forEach((routine) => {
-  //     routine.activities = activitiesByRoutineId[routine.id] || [];
-  //   });
-
-  //   return routines;
-  // } catch (error) {
-  //   console.log(error);
-  // }
 }
 
 async function updateActivity({ id, ...fields }) {

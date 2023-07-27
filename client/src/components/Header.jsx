@@ -57,6 +57,7 @@ const Header = ({isLoggedIn, username, setUsername, password, setPassword, setTo
                 <>
                 {isLoggedIn ? 
                 <>
+                <NavLink to="/me">Profile</NavLink>
                 <button type="submit" onClick={handleLogout}>Logout</button>
                 </>
                 :

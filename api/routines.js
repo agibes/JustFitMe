@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllPublicRoutines, createRoutine, getRoutineById, updateRoutine, destroyRoutine, getRoutineActivitiesByRoutine, destroyRoutineActivity, addActivityToRoutine, getActivityById } = require('../db');
+const { getAllPublicRoutines, createRoutine, getRoutineById, updateRoutine, destroyRoutine, getRoutineActivitiesByRoutine, destroyRoutineActivity, createRoutineActivity, getActivityById } = require('../db');
 const {requireUser} = require('./utils')
 const router = express.Router();
 
@@ -96,7 +96,7 @@ router.post('/:routineId/activities', requireUser, async (req, res, next) => {
        
         } else {
 
-            const routine = await addActivityToRoutine({routineId, activityId, count, duration});
+            const routine = await createRoutineActivity({routineId, activityId, count, duration});
             if (routine) {
 
                 // console.log(routine);

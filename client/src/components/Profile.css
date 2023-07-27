@@ -1,0 +1,28 @@
+#profile {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    height: 100%;
+    margin: 0 60px ;
+    padding: 0 0 30px 0;
+    background-color: rgba(0, 0, 0, 0.582);
+    border-radius: 20px;;
+    box-shadow: -2px 2px 10px black;
+    color: white;
+}
+
+#profile h1 {
+    font-size: 3rem;
+    padding: 20px;
+    margin: 0;
+    color:rgb(240, 227, 51)
+}
+
+#profile p {
+    margin: 0;
+    padding: 20px;
+    text-align: left;
+    width: 100%;
+    align-self: auto;
+    font-size: 2.2em;
+}

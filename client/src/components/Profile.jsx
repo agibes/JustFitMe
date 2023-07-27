@@ -1,12 +1,27 @@
 import { React } from 'react';
+import './Profile.css'
 
-const Profile = ({isLoggedIn}) => {
+const Profile = ({isLoggedIn, user}) => {
 
 
 
     return (
         <>
-        {isLoggedIn ? <h1>hello from profile</h1> : <h1>Please log in to view your profile</h1>}
+        {isLoggedIn ? 
+        <>
+        <div className="rt-bg-img"></div>
+        <div id="profile">
+
+        <h1>Welcome back {user.username}!</h1> 
+        <p>Jump back into your routine activities:</p>
+        <div className="routine-activities">
+            <div className="routine-activities-card">
+
+            </div>
+        </div>
+        </div>
+        </>
+        : <h1>Please log in to view your profile</h1>}
         </>
     )
 }
