@@ -1,7 +1,7 @@
 const client = require("./client");
 const bcrypt = require("bcrypt");
 const SALT_COUNT = 10;
-const { attachUserRoutinesToUser } = require("./routines");
+const { attachUserRoutinesToUser, buildUser } = require("./routines");
 
 async function createUser({username, password}) {
   try {
@@ -31,7 +31,8 @@ async function getUser({ username, password }) {
         SELECT id, username FROM users
         WHERE username=$1
       `, [username]);
-      return user;
+
+      return await buildUser(user);
     }
   } catch (error) {
     console.log(error);
@@ -57,8 +58,8 @@ async function getUserById(userId) {
 async function getUserByUsername(userName) {
   try {
     const {rows: [user]} = await client.query(`
-      SELECT id, username, password FROM users
-      WHERE userName=$1
+      SELECT * FROM users
+      WHERE users.username=$1
     `, [userName]);
     return user;
   } catch (error) {
@@ -71,8 +72,10 @@ async function getAllUsers() {
     const {rows: users} = await client.query(`
       SELECT * FROM users
     `);
-    console.log('users from getAll Users:', users)
-    return await attachUserRoutinesToUser(users);
+    return [users]
+    //const allUsers = users.for each user => allUsers.push(build(user), or maybe just build(user) or use usersToReturn)
+    //get all users doesnt work with the return below
+    // return await attachUserRoutinesToUser(users);
   } catch (error) {
     console.error(error);
   }

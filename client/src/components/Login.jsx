@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import './Login.css';
 
 const Login = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername, password, setPassword, setToken, token }) => {
-    // console.log(user, isLoggedIn)
 
     const navigate = useNavigate();
 
@@ -18,7 +17,7 @@ const Login = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername,
             document.getElementById('loginForm').append(errorAlert)
         }
         const data = await loginUser({username, password}); 
-        console.log('data--->' , data);
+        // console.log('data--->' , data);
         // if(data.hasOwnProperty('message')) {
         //     document.getElementById('loginForm').append(errorAlert)
 

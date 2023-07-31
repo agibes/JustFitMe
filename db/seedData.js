@@ -1,5 +1,5 @@
 // require in the database adapter functions as you write them (createUser, createActivity...)
-const { createUser, createUserRoutine, getAllUsers, createActivity, createRoutine, getRoutinesWithoutActivities, getAllActivities, getAllRoutines, createRoutineActivity, attachRoutineActivitiesToRoutines} = require('./');
+const { createUser, getUser, buildUser, createUserRoutine, getAllUsers, createActivity, createRoutine, getRoutinesWithoutActivities, getAllActivities, getAllRoutines, createRoutineActivity, attachRoutineActivitiesToRoutines} = require('./');
 const client = require("./client")
 
 //////////////////
@@ -297,7 +297,17 @@ async function rebuildDB() {
     await createInitialRoutines()
     await createInitialUserRoutines()
     await createInitialRoutineActivities()
-    await getAllUsers();
+    // const all = await getAllRoutines();
+    // all.map(a=>{
+
+    //   console.log('routineActivities', a.routineActivities);
+    // })
+    // await buildUser({id: 1})
+
+    const [u] = await getUser({ username: "sandra", password: "sandra123" })
+    // const [a] = await getUser({ username: "albert", password: "bertie99" })
+    // console.log('user from get user u', u)
+    // console.log('user from get user a', a)
 
   } catch (error) {
     console.log("Error during rebuildDB")

@@ -42,9 +42,7 @@ const Home = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername, 
     //     }
         return (
         <>
-            <div className="bg-img">
-                {/* <img src="boxing.jpg" alt="" /> */}
-            </div>
+            <div className="bg-img"></div>
             <div id="hero">
                 <h1>Find your path to better health today.</h1>
                 <p id="hr"></p>

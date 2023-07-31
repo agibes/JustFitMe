@@ -3,7 +3,7 @@ import './Profile.css'
 
 const Profile = ({isLoggedIn, user}) => {
 
-
+    console.log(user);
 
     return (
         <>
@@ -13,11 +13,29 @@ const Profile = ({isLoggedIn, user}) => {
         <div id="profile">
 
         <h1>Welcome back {user.username}!</h1> 
-        <p>Jump back into your routine activities:</p>
+        <p>Jump back into your routines:</p>
         <div className="routine-activities">
-            <div className="routine-activities-card">
-
-            </div>
+            {user.routines.map(routine=>{
+                return(
+                    <div className="routine">
+                        <h2>{routine.name}</h2>
+                        <div id="grid">
+                            <h3>Acitivities</h3>
+                            <h4>Reps</h4>
+                            <h4>Sets</h4>
+                        {routine.activities.map(activity => {
+                            return(
+                                <>
+                                <p>{activity.name}</p>
+                                <p>{activity.duration}</p>
+                                <p>{activity.count}</p>
+                                </>
+                            )
+                        })}
+                        </div>
+                    </div>
+                )
+            })}
         </div>
         </div>
         </>

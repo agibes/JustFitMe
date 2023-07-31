@@ -1,6 +1,7 @@
 const { attachRoutineActivitiesToRoutines } = require("./routine_activities");
 const { getUserByUsername } = require ("./users");
 const client = require("./client");
+const { attachActivitiesToRoutines } = require("./activities");
 
 async function createRoutine({ creatorId, isPublic, name, goal, img }) {
   try {
@@ -151,32 +152,63 @@ async function destroyRoutine(id) {
   }
 }
 
-async function attachUserRoutinesToUser(users) {
-  try {
-    const usersToReturn = [...users];
+//previously called attachRoutineInfoToUserRoutines(user)
+async function buildUser(user) {
+  const {rows: userRoutines} = await client.query(`
+    SELECT * FROM user_routines
+    WHERE user_routines."userId" = $1
+  `, [user.id]);
 
-    const placeholders = users.map((_, index) => `$${index + 1}`).join(', ');
+  const placeholders = userRoutines.map((_, index) => `$${index + 1}`).join(', ');
 
-    const usersIds = users.map((user) => user.id);
+  const routineIds = userRoutines.map((routine) => routine.routineId);
+  
+  const {rows: routines} = await client.query(`
+    SELECT user_routines.*, routines.*
+    FROM user_routines
+    JOIN routines ON routines.id = user_routines."routineId"
+    WHERE routines.id IN (${placeholders})
+  `, routineIds);
 
-    const {rows: userRoutines} = await client.query(`
-      SELECT users.*, user_routines.*
-      FROM users
-      JOIN user_routines ON user_routines."userId" = users.id
-      WHERE user_routines."userId" IN (${placeholders})
-    `, usersIds);
+  //this doesnt work correctly
+  //i dont think we need to attach routine activities to routines?
+  // await attachRoutineActivitiesToRoutines(routines)
+  await attachActivitiesToRoutines(routines)
 
-    for (const user of usersToReturn) {
-      const userRoutinesForUser = userRoutines.filter((userRoutine)=> userRoutine.userId == user.id);
-      user.userRoutines = userRoutinesForUser;
-    }
-    
-    console.log('users to return: ', usersToReturn)
-    return usersToReturn;
-  } catch(error) {
-    console.error(error);
-  }
+  const routinesForUserRoutines = routines.filter((routine) => routine.userId == user.id);
+
+  user.routines = routinesForUserRoutines;
+
+  return [user];
+
 }
+
+//not sure how this is different from the one above, and its only used in getAllUsers
+// async function attachUserRoutinesToUser(users) {
+//   try {
+//     const usersToReturn = [...users];
+
+//     const placeholders = users.map((_, index) => `$${index + 1}`).join(', ');
+
+//     const [usersIds] = users.map((user) => user.id);
+
+//     const {rows: userRoutines} = await client.query(`
+//       SELECT user_routines.*
+//       FROM users
+//       JOIN user_routines ON user_routines."userId" = users.id
+//       WHERE user_routines."userId" IN (${placeholders})
+//     `, [usersIds]);
+
+//     for (const user of usersToReturn) {
+//       const userRoutinesForUser = userRoutines.filter((userRoutine)=> userRoutine.userId == user.id);
+//       user.userRoutines = userRoutinesForUser;
+//     }
+    
+//     return usersToReturn;
+//   } catch(error) {
+//     console.error(error);
+//   }
+// }
 
 module.exports = {
   getRoutineById,
@@ -189,5 +221,6 @@ module.exports = {
   createRoutine,
   updateRoutine,
   destroyRoutine,
-  attachUserRoutinesToUser
+  // attachUserRoutinesToUser,
+  buildUser
 };

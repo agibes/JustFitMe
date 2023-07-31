@@ -61,7 +61,7 @@ usersRouter.post("/login", async (req, res, next) => {
     }
 
     try {
-        const user = await getUser({ username, password });
+        const [user] = await getUser({ username, password });
         console.log('user in user api--->', user);
         
         if (user) {

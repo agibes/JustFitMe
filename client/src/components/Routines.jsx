@@ -178,30 +178,3 @@ export default Routines;
         // </div>
         // </>
         // }
-        // {/* {console.log(publicRoutines)} */}
-
-
-
-
-        // <div id="routine-carousel">
-        //     <button id="prev" onClick={loadPrev}>&#60;</button>
-        //     {publicRoutines.length && publicRoutines != undefined && 
-        //     publicRoutines.map(routine => {
-        //         // setSingleRoutine(routine)
-        //         return (
-        //             <>
-        //             <div key={routine.id} class="routine-card">
-        //                 <img src="#" alt="" />
-        //                 <div class="routine-info">
-        //                     <p>Name: {routine.name}</p>
-        //                     <p>Goal: {routine.goal}</p>
-        //                     <p>Creator ID: {routine.creatorName}</p>
-        //                     <br/>
-        //                 </div>
-        //             </div>
-        //             </>
-        //             )
-        //         })
-        //     }
-        //     <button id="next" onClick={loadNext}>&#62;</button>
-        // </div>

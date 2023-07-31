@@ -83,7 +83,7 @@ export const registerUser = async (userObj) => {
 
 export const loginUser = async (userObj) => {
     try {
-        console.log(userObj);
+        // console.log(userObj);
         const response = await fetch('/api/users/login', {
                 method: "POST",
                 headers: {

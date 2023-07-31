@@ -11,7 +11,6 @@ const MyRoutines = ({isLoggedIn, user, token, setSingleRoutine}) => {
     useEffect(()=> {
         const userRoutinesFuction = async (token) => {
             const userRoutines = await getUserRoutines(username, token);
-            // console.log(userRoutines);
             setUserRoutines(userRoutines)
         }
         userRoutinesFuction(token);
