@@ -1,20 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import './Home.css'
 
-
-// As an unregistered visitor I want to:
-//**************************************** complete ****************************************// see a Sign Up/Sign In form in the header/footer, on a tab (with or without matching route) or in a modal
-//**************************************** complete ****************************************// be able to sign up for a new account with valid username/password combination
-// see meaningful messages if there are errors during registration, so that I may correct them
-//**************************************** complete ****************************************// see tabbed navigation for Routines and Activities (with matching routes)
-
-// As a registered user I want to:
-//**************************************** complete ****************************************//be able to log in with my username/password combination
-// see meaningful messages if there are errors during login, so that I may correct them
-// stay logged in between page visits (for example, if I close my browser, and come back later)
-//**************************************** complete ****************************************// be able to log out if I am logged in
-//**************************************** complete ****************************************//see tabbed navigation for Routines, My Routines (once logged in), and Activities (with matching routes)
-// 
 const Home = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername, password, setPassword, setToken, }) => {
     // console.log(user, isLoggedIn)
     // const navigate = useNavigate();

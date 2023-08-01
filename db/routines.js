@@ -28,7 +28,6 @@ async function getRoutineById(id) {
   }
 }
 
-//why do we need this one?
 async function getRoutinesWithoutActivities() {
     try {
       const{rows: [routine]} = await client.query(`
@@ -69,7 +68,7 @@ async function getAllPublicRoutines() {
   }
 }
 
-//should be get all routines by creator
+//all routines by creater
 async function getAllRoutinesByUser({ username }) {
   const user = await getUserByUsername(username);
   const userId = user.id
@@ -102,7 +101,6 @@ async function getPublicRoutinesByUser({ username }) {
   }
 }
 
-//id is undefined
 async function getPublicRoutinesByActivity({ id }) { 
   try {
     const{rows: routines} = await client.query(`
@@ -152,63 +150,36 @@ async function destroyRoutine(id) {
   }
 }
 
-//previously called attachRoutineInfoToUserRoutines(user)
 async function buildUser(user) {
   const {rows: userRoutines} = await client.query(`
-    SELECT * FROM user_routines
-    WHERE user_routines."userId" = $1
+  SELECT * FROM user_routines
+  WHERE user_routines."userId" = $1
   `, [user.id]);
-
-  const placeholders = userRoutines.map((_, index) => `$${index + 1}`).join(', ');
-
-  const routineIds = userRoutines.map((routine) => routine.routineId);
   
-  const {rows: routines} = await client.query(`
+  const placeholders = userRoutines.map((_, index) => `$${index + 1}`).join(', ');
+  console.log(placeholders)
+  
+  const routineIds = userRoutines.map((routine) => routine.routineId);
+  console.log('routineids', routineIds)
+  if (routineIds.length) {
+
+    const {rows: routines} = await client.query(`
     SELECT user_routines.*, routines.*
     FROM user_routines
     JOIN routines ON routines.id = user_routines."routineId"
     WHERE routines.id IN (${placeholders})
-  `, routineIds);
+    `, routineIds);
 
-  //this doesnt work correctly
-  //i dont think we need to attach routine activities to routines?
-  // await attachRoutineActivitiesToRoutines(routines)
-  await attachActivitiesToRoutines(routines)
-
-  const routinesForUserRoutines = routines.filter((routine) => routine.userId == user.id);
-
-  user.routines = routinesForUserRoutines;
+    await attachActivitiesToRoutines(routines)
+    
+      const routinesForUserRoutines = routines.filter((routine) => routine.userId == user.id);
+    
+      user.routines = routinesForUserRoutines;
+  }
 
   return [user];
 
 }
-
-//not sure how this is different from the one above, and its only used in getAllUsers
-// async function attachUserRoutinesToUser(users) {
-//   try {
-//     const usersToReturn = [...users];
-
-//     const placeholders = users.map((_, index) => `$${index + 1}`).join(', ');
-
-//     const [usersIds] = users.map((user) => user.id);
-
-//     const {rows: userRoutines} = await client.query(`
-//       SELECT user_routines.*
-//       FROM users
-//       JOIN user_routines ON user_routines."userId" = users.id
-//       WHERE user_routines."userId" IN (${placeholders})
-//     `, [usersIds]);
-
-//     for (const user of usersToReturn) {
-//       const userRoutinesForUser = userRoutines.filter((userRoutine)=> userRoutine.userId == user.id);
-//       user.userRoutines = userRoutinesForUser;
-//     }
-    
-//     return usersToReturn;
-//   } catch(error) {
-//     console.error(error);
-//   }
-// }
 
 module.exports = {
   getRoutineById,
@@ -221,6 +192,5 @@ module.exports = {
   createRoutine,
   updateRoutine,
   destroyRoutine,
-  // attachUserRoutinesToUser,
   buildUser
 };

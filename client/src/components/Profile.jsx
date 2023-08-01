@@ -15,7 +15,8 @@ const Profile = ({isLoggedIn, user}) => {
         <h1>Welcome back {user.username}!</h1> 
         <p>Jump back into your routines:</p>
         <div className="routine-activities">
-            {user.routines.map(routine=>{
+            {user.routines &&
+            user.routines.map(routine=>{
                 return(
                     <div className="routine">
                         <h2>{routine.name}</h2>

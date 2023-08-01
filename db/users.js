@@ -31,7 +31,7 @@ async function getUser({ username, password }) {
         SELECT id, username FROM users
         WHERE username=$1
       `, [username]);
-
+      
       return await buildUser(user);
     }
   } catch (error) {

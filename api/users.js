@@ -2,7 +2,7 @@
 const express = require("express");
 const usersRouter = express.Router();
 
-const { getUserByUsername, createUser, getUserById, getUser } = require('../db/users');
+const { getAllUsers, getUserByUsername, createUser, getUserById, getUser } = require('../db/users');
 const { getPublicRoutinesByUser, getAllRoutinesByUser } = require('../db/routines');
 const jwt = require("jsonwebtoken");
 const { token } = require("morgan");
@@ -26,14 +26,14 @@ usersRouter.post("/register", async (req, res, next) => {
             username,
             password
         });
-
+        
         const token = jwt.sign({
             id: user.id,
             username
         }, process.env.JWT_SECRET, {
             expiresIn: "1w"
         });
-
+        
         res.send({
             message: "You Successfully Registered!",
             user,
@@ -59,9 +59,10 @@ usersRouter.post("/login", async (req, res, next) => {
             message: "Please supply both a username and password"
         });
     }
-
+    
     try {
         const [user] = await getUser({ username, password });
+        console.log('trying');
         console.log('user in user api--->', user);
         
         if (user) {

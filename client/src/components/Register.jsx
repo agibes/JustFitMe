@@ -22,7 +22,10 @@ const Register = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUserna
             // const ele = document.getElementById('errorAlert')
             // console.log(ele);
             console.log({username, password});
+            console.log('a')
             await registerUser({username, password});
+            console.log('b')
+
             const successAlert = document.createElement("p")
             successAlert.append('you have been registered, please log in')
             document.getElementById('registerForm').append(successAlert)
