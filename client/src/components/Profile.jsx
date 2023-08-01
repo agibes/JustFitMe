@@ -21,8 +21,8 @@ const Profile = ({isLoggedIn, user}) => {
                         <h2>{routine.name}</h2>
                         <div id="grid">
                             <h3>Acitivities</h3>
-                            <h4>Reps</h4>
-                            <h4>Sets</h4>
+                            <h4>Count</h4>
+                            <h4>Duration</h4>
                         {routine.activities.map(activity => {
                             return(
                                 <>
