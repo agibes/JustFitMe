@@ -9,8 +9,8 @@ const Profile = ({isLoggedIn, user}) => {
         <>
         {isLoggedIn ? 
         <>
-        <div className="rt-bg-img"></div>
-        <div id="profile">
+        {/* <div className="rt-bg-img"></div> */}
+        <div className="main" id="profile">
 
         <h1>Welcome back {user.username}!</h1> 
         <p>Jump back into your routines:</p>

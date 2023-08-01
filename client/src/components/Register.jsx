@@ -38,8 +38,8 @@ const Register = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUserna
         return (
             <>
 
-        <div className="rt-bg-img"></div>
-        <div id="register">
+        {/* <div className="rt-bg-img"></div> */}
+        <div className="main" id="register">
             
         <div id="register-form">
             <h1>Register</h1>

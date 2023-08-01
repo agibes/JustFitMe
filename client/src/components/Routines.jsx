@@ -88,9 +88,9 @@ const Routines = ({publicRoutines, setPublicRoutines, isLoggedIn, user, token, s
 
     return (
         <>
-        <div className="rt-bg-img"></div>
+        {/* <div className="rt-bg-img"></div> */}
 
-        <div id="routines">
+        <div className="main" id="routines">
             <h1>Routines</h1>
             <p id="routines-info">We offer a variety of workout routines tailored to different fitness levels and objectives. Whether you're aiming to build strength, lose weight, improve flexibility, or enhance athletic performance, our diverse range of programs ensures there's something for everyone.</p>
         <div id="routines-browse">

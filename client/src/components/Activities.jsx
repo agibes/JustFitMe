@@ -13,9 +13,9 @@ const Activities = ({allActivities}) => {
 
     return (
         <>
-        <div className="rt-bg-img"></div>
+        {/* <div className="rt-bg-img"></div> */}
 
-        <div id="activities">
+        <div className="main" id="activities">
             <h1>Activities</h1>
             <p id="activities-info">Adding variety to your fitness routine is crucial to staying motivated and engaged in your workouts. By incorporating these dynamic fitness activities into your regimen, you'll not only achieve your fitness goals but also have a blast along the way.</p>
         <div id="activities-browse">

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import {Header, Routines, Activities, Home, Register, Login, Profile, MyRoutines, SingleRoutine} from './index';
 import { getPublicRoutines, getAllActivities, getUserRoutines } from '../api/api';
+import './Styles.css'
 
 const App = () => {
     // const [routines, setRoutines] = useState([]);

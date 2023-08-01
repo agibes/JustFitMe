@@ -1,42 +1,8 @@
-#profile {
-    display: flex;
-    flex-direction: column;
-    width: 75%;
-    height: 100%;
-    margin: 0 60px ;
-    padding: 0 0 30px 0;
-    background-color: rgba(0, 0, 0, 0.582);
-    border-radius: 20px;;
-    box-shadow: -2px 2px 10px black;
-    color: white;
-}
-
-#profile h1 {
-    font-size: 3rem;
-    padding: 20px;
-    margin: 0;
-    color:rgb(240, 227, 51)
-}
-
-#profile p {
-    margin: 0;
-    padding: 10px;
-    text-align: left;
-    width: 100%;
-    align-self: auto;
-    font-size: 2.2em;
-}
-
 .routine {
     background-color: rgb(255, 255, 255);
     margin: 10px;
     border-radius: 120px;
-    /* height: 60px; */
-    /* display: flex;
-    flex-direction: column; */
     color: black;
-    /* padding: 10px; */
-    /* align-items: center; */
     cursor: pointer;
     padding-left: 100px;
     padding-top: 10px;
@@ -46,8 +12,6 @@
 #profile .routine p {
     color: black;
     font-size: 1.1em;
-    /* padding: 10px; */
-    /* margin-left: 10px; */
 }
 
 div.routine h2 {
@@ -66,14 +30,12 @@ div.routine h3 {
 div#grid {
     display:inline-grid;
     grid-template-columns: 80% 100px 100px;
-    /* text-align: center; */
     width: 100%;
     margin-bottom: 20px;
 }
 
 div#grid p {
     margin: 0;
-    /* text-align: center; */
 }
 
 

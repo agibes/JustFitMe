@@ -19,7 +19,7 @@ const MyRoutines = ({isLoggedIn, user, token, setSingleRoutine}) => {
     console.log('userroutines--->',userRoutines);
     return (
         <>
-        <div id="routines">
+        <div className="main" id="routines">
 
         {!isLoggedIn ?
             <h1>Please login to view your routines</h1>

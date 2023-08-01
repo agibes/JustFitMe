@@ -41,8 +41,8 @@ const Login = ({user, setUser, isLoggedIn, setIsLoggedIn, username, setUsername,
         
         return (
         <>
-        <div className="rt-bg-img"></div>
-        <div id="login">
+        {/* <div className="rt-bg-img"></div> */}
+        <div className="main" id="login">
 
         <div id="login-form">
             <h1>Login</h1>
